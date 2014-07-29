@@ -203,6 +203,8 @@ OPTIONS = Trollop::options do
   opt :bundle, "bundle install and pessimize", short: :b
 
   opt :command, "Run a specific command in all apps", short: :c, type: String
+
+  opt :apps, "Available apps", default: false
 end
 
 def db_app
@@ -225,6 +227,12 @@ def apps
   end
 end
 
+if OPTIONS[:apps]
+  apps.each do |app|
+    puts app
+  end
+  exit 0
+end
 
 max_name_length = apps.max { |a, b| a.name.size <=> b.name.size }.name.size
 
